@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b0b10">
+<title>Aziz &amp; Malika — To'y taklifnomasi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Tangerine:wght@400;700&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b0b10;
+    --ink-soft:#15151d;
+    --ink-soft-2:#1c1c26;
+    --gold:#cda165;
+    --gold-light:#ecd9b0;
+    --gold-deep:#8a6a3a;
+    --rose:#cf9a93;
+    --rose-deep:#7a3b3f;
+    --pearl:#f7f1e6;
+    --ivory:#fbf8f2;
+    --line: rgba(205,161,101,0.28);
+    --shadow-gold: rgba(205,161,101,0.35);
+    --fs-eyebrow: clamp(0.7rem, 1.4vw, 0.85rem);
+    --fs-name: clamp(3.2rem, 13vw, 7.5rem);
+    --fs-h2: clamp(1.7rem, 4.2vw, 2.7rem);
+    --fs-body: clamp(0.95rem, 1.6vw, 1.05rem);
+    --ease: cubic-bezier(.22,.88,.30,1);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  html, body.locked{ overflow:hidden; height:100%; }
+
+  body{
+    background:var(--ink);
+    color:var(--pearl);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+
+  body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    background:
+      radial-gradient(ellipse 60% 40% at 15% 0%, rgba(205,161,101,0.10), transparent 60%),
+      radial-gradient(ellipse 50% 35% at 90% 10%, rgba(122,59,63,0.12), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgba(205,161,101,0.07), transparent 60%);
+  }
+
+  img,svg{ display:block; max-width:100%; }
+
+  a{ color:inherit; text-decoration:none; }
+
+  button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+
+  .container{ max-width:1080px; margin:0 auto; padding:0 1.6rem; }
+  .container.narrow{ max-width:680px; }
+
+  .eyebrow{
+    font-family:'Italiana', serif;
+    letter-spacing:0.32em;
+    font-size:var(--fs-eyebrow);
+    color:var(--gold);
+    text-align:center;
+    text-transform:uppercase;
+  }
+
+  .section-title{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-size:var(--fs-h2);
+    text-align:center;
+    color:var(--ivory);
+    margin-top:0.6rem;
+  }
+
+  section{
+    position:relative;
+    z-index:1;
+    padding:6.5rem 0;
+  }
+
+  /* ---------- reveal-on-scroll ---------- */
+  [data-reveal]{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  }
+  [data-reveal].in-view{ opacity:1; transform:translateY(0); }
+  [data-reveal-delay="1"]{ transition-delay:0.12s; }
+  [data-reveal-delay="2"]{ transition-delay:0.24s; }
+  [data-reveal-delay="3"]{ transition-delay:0.36s; }
+
+  @media (prefers-reduced-motion: reduce){
+    [data-reveal]{ opacity:1; transform:none; transition:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  /* ===================== ENVELOPE GATE ===================== */
+  .envelope-gate{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2.2rem;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 30%, rgba(205,161,101,0.10), transparent 65%),
+      var(--ink);
+    transition:opacity 1s var(--ease), visibility 1s;
+  }
+  .envelope-gate.hide{ opacity:0; visibility:hidden; pointer-events:none; }
+
+  .gate-grain{
+    position:absolute; inset:0;
+    background-image:radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size:3px 3px;
+    pointer-events:none;
+  }
+
+  .envelope{
+    position:relative;
+    width:min(78vw, 320px);
+    height:min(58vw, 220px);
+    perspective:1200px;
+  }
+
+  .env-back{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(160deg, var(--ivory), #efe7d6);
+    border:1px solid var(--gold-deep);
+    border-radius:4px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(205,161,101,0.15);
+  }
+
+  .env-pocket{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:62%;
+    background:linear-gradient(160deg, #f4ecdc, #e9dec5);
+    clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    border-radius:0 0 4px 4px;
+    z-index:3;
+  }
+  .env-pocket::before{
+    content:'';
+    position:absolute; inset:0;
+    clip-path:polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+    background:linear-gradient(165deg, #efe5cf, #e2d4b3);
+  }
+
+  .env-card{
+    position:absolute;
+    left:8%; right:8%;
+    bottom:10%;
+    height:44%;
+    background:var(--ink-soft);
+    border:1px solid var(--line);
+    border-radius:3px;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:transform 1.1s var(--ease) 0.25s;
+  }
+  .env-card-label{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    color:var(--gold-light);
+    font-size:0.9rem;
+    letter-spacing:0.05em;
+  }
+  .envelope.opening .env-card{ transform:translateY(-46%); }
+
+  .env-flap{
+    position:absolute;
+    top:0; left:0; right:0;
+    height:62%;
+    clip-path:polygon(0 0, 100% 0, 50% 100%);
+    background:linear-gradient(195deg, #f7f1e6, #e7dabd);
+    transform-origin:top center;
+    transform-style:preserve-3d;
+    transition:transform 1.15s var(--ease);
+    z-index:4;
+    box-shadow:0 2px 18px rgba(0,0,0,0.25);
+  }
+  .env-flap.open{ transform:rotateX(180deg); z-index:1; }
+
+  .seal{
+    position:absolute;
+    left:50%; top:38%;
+    width:54px; height:54px;
+    transform:translate(-50%,-50%) scale(1);
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--gold-light), var(--gold) 55%, var(--gold-deep) 100%);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 16px rgba(0,0,0,0.35), inset 0 0 0 2px rgba(255,255,255,0.15);
+    transition:transform 0.55s cubic-bezier(.5,-0.4,.6,1.4), opacity 0.55s ease;
+    z-index:5;
+  }
+  .seal-mono{
+    font-family:'Italiana', serif;
+    font-size:0.78rem;
+    letter-spacing:0.06em;
+    color:#3a2a14;
+  }
+  .seal.break{ transform:translate(-50%,-50%) scale(0.2) rotate(25deg); opacity:0; }
+
+  .open-btn{
+    position:relative;
+    padding:0.95rem 2.6rem;
+    border:1px solid var(--gold);
+    border-radius:999px;
+    color:var(--gold-light);
+    font-family:'Italiana', serif;
+    letter-spacing:0.2em;
+    font-size:0.78rem;
+    text-transform:uppercase;
+    overflow:hidden;
+    transition:color 0.4s, box-shadow 0.4s, transform 0.3s;
+  }
+  .open-btn::before{
+    content:'';
+    position:absolute; inset:0;
+    background:var(--gold);
+    transform:translateX(-101%);
+    transition:transform 0.45s var(--ease);
+    z-index:-1;
+  }
+  .open-btn:hover::before{ transform:translateX(0); }
+  .open-btn:hover{ color:#1c140a; box-shadow:0 8px 24px var(--shadow-gold); }
+  .open-btn:active{ transform:scale(0.96); }
+
+  .gate-hint{
+    font-size:0.82rem;
+    color:rgba(247,241,230,0.5);
+    font-style:italic;
+    font-family:'Cormorant Garamond', serif;
+    text-align:center;
+    padding:0 1.5rem;
+  }
+
+  /* ===================== PARTICLES ===================== */
+  .particles-canvas{
+    position:absolute;
+    inset:0;
+    width:100%; height:100%;
+    pointer-events:none;
+    opacity:0.55;
+  }
+
+  /* ===================== HERO ===================== */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    padding-top:4rem;
+    padding-bottom:4rem;
+  }
+  .hero-inner{
+    position:relative;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:1.1rem;
+    text-align:center;
+    padding:0 1.2rem;
+  }
+  .couple-names{
+    display:flex;
+    align-items:center;
+    gap:clamp(0.6rem, 3vw, 1.6rem);
+    font-family:'Tangerine', cursive;
+    font-weight:700;
+    font-size:var(--fs-name);
+    line-height:1;
+    color:var(--gold-light);
+    text-shadow:0 0 30px rgba(205,161,101,0.35);
+  }
+  .couple-names .amp{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(1.6rem, 5vw, 2.6rem);
+    color:var(--rose);
+  }
+
+  .flourish-divider{ width:min(70vw, 220px); margin:0.4rem auto; opacity:0.85; }
+  .flourish-divider svg{ width:100%; height:auto; }
+  .flourish-line{
+    stroke-dasharray:300;
+    stroke-dashoffset:300;
+    transition:stroke-dashoffset 1.4s var(--ease) 0.2s;
+  }
+  [data-reveal].in-view .flourish-line{ stroke-dashoffset:0; }
+
+  .hero-date{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    letter-spacing:0.06em;
+    font-size:clamp(1rem, 2vw, 1.25rem);
+    color:rgba(247,241,230,0.78);
+  }
+
+  .scroll-cue{
+    position:absolute;
+    bottom:2.2rem; left:50%;
+    transform:translateX(-50%);
+    width:1px; height:46px;
+    z-index:2;
+  }
+  .scroll-cue-line{
+    display:block;
+    width:1px; height:100%;
+    background:linear-gradient(to bottom, var(--gold), transparent);
+    animation:cueMove 2.2s ease-in-out infinite;
+  }
+  @keyframes cueMove{
+    0%{ transform:scaleY(0.2); transform-origin:top; opacity:0.3; }
+    50%{ transform:scaleY(1); transform-origin:top; opacity:1; }
+    100%{ transform:scaleY(0.2); transform-origin:bottom; opacity:0.3; }
+  }
+
+  /* ===================== VERSE ===================== */
+  .verse{ text-align:center; padding:4.5rem 0 5.5rem; }
+  .verse-flourish{ width:46px; margin:0 auto 1.6rem; opacity:0.8; }
+  .verse-text{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(1.15rem, 2.6vw, 1.55rem);
+    color:var(--pearl);
+    max-width:560px;
+    margin:0 auto;
+  }
+  .verse-sign{
+    display:block;
+    margin-top:1.2rem;
+    font-family:'Italiana', serif;
+    font-size:0.8rem;
+    letter-spacing:0.18em;
+    color:var(--gold);
+    text-transform:uppercase;
+  }
+
+  /* ===================== COUNTDOWN ===================== */
+  .countdown{ background:linear-gradient(180deg, transparent, rgba(205,161,101,0.04), transparent); }
+  .countdown-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:clamp(0.6rem, 2vw, 1.4rem);
+    max-width:620px;
+    margin:2.6rem auto 0;
+    padding:0 1rem;
+  }
+  .count-card{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0.4rem;
+    padding:1.4rem 0.4rem 1.2rem;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:rgba(205,161,101,0.05);
+  }
+  .count-num{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-size:clamp(1.8rem, 5vw, 2.6rem);
+    color:var(--gold-light);
+    transition:transform 0.4s var(--ease);
+  }
+  .count-num.tick{ transform:scale(1.18); }
+  .count-label{
+    font-size:0.68rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:rgba(247,241,230,0.55);
+  }
+
+  /* ===================== EVENTS ===================== */
+  .events-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.6rem;
+    max-width:880px;
+    margin:2.8rem auto 0;
+    padding:0 1.2rem;
+  }
+  .event-card{
+    background:var(--ink-soft);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:2.4rem 1.8rem;
+    text-align:center;
+    transition:transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s;
+  }
+  .event-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 22px 40px -18px rgba(0,0,0,0.55);
+    border-color:var(--gold);
+  }
+  .event-icon{ width:42px; height:42px; margin:0 auto 1.2rem; color:var(--gold); }
+  .event-card h3{
+    font-family:'Italiana', serif;
+    font-size:1.1rem;
+    letter-spacing:0.04em;
+    color:var(--ivory);
+    margin-bottom:0.5rem;
+  }
+  .event-time{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.7rem;
+    color:var(--gold-light);
+    margin-bottom:0.7rem;
+  }
+  .event-place{
+    font-size:0.92rem;
+    color:rgba(247,241,230,0.72);
+    line-height:1.55;
+  }
+  .map-link{
+    display:inline-block;
+    margin-top:1rem;
+    font-size:0.82rem;
+    letter-spacing:0.05em;
+    color:var(--gold);
+    border-bottom:1px solid var(--gold-deep);
+    padding-bottom:2px;
+    transition:color 0.3s, border-color 0.3s;
+  }
+  .map-link:hover{ color:var(--gold-light); border-color:var(--gold-light); }
+
+  /* ===================== DRESS CODE ===================== */
+  .dresscode-note{
+    text-align:center;
+    max-width:560px;
+    margin:1rem auto 0;
+    font-size:var(--fs-body);
+    color:rgba(247,241,230,0.75);
+  }
+  .palette{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:1.6rem;
+    margin-top:2.4rem;
+  }
+  .swatch-wrap{ display:flex; flex-direction:column; align-items:center; gap:0.6rem; }
+  .swatch{
+    width:46px; height:46px;
+    border-radius:50%;
+    background:var(--c);
+    box-shadow:0 8px 18px -6px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.18);
+    transition:transform 0.35s var(--ease);
+  }
+  .swatch-wrap:hover .swatch{ transform:translateY(-5px) scale(1.06); }
+  .swatch-label{ font-size:0.72rem; letter-spacing:0.05em; color:rgba(247,241,230,0.6); text-align:center; }
+
+  /* ===================== MOMENTS ===================== */
+  .moments-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1.4rem;
+    max-width:880px;
+    margin:2.6rem auto 0;
+    padding:0 1.2rem;
+  }
+  .moment-frame{
+    aspect-ratio:3/4;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:linear-gradient(155deg, rgba(205,161,101,0.10), rgba(122,59,63,0.10));
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:0.6rem;
+    color:rgba(247,241,230,0.45);
+    transition:transform 0.4s var(--ease), border-color 0.4s;
+  }
+  .moment-frame:hover{ transform:translateY(-5px); border-color:var(--gold); }
+  .moment-frame svg{ width:26px; height:26px; opacity:0.7; }
+  .moment-frame span{ font-size:0.72rem; letter-spacing:0.04em; }
+
+  /* ===================== RSVP ===================== */
+  .rsvp-note{
+    text-align:center;
+    max-width:480px;
+    margin:1rem auto 0;
+    color:rgba(247,241,230,0.72);
+  }
+  .rsvp-form{
+    max-width:480px;
+    margin:2.6rem auto 0;
+    display:flex;
+    flex-direction:column;
+    gap:1.3rem;
+    padding:0 1.2rem;
+  }
+  .rsvp-form label{
+    display:flex;
+    flex-direction:column;
+    gap:0.5rem;
+    font-size:0.85rem;
+    letter-spacing:0.03em;
+    color:rgba(247,241,230,0.7);
+  }
+  .rsvp-form input[type="text"],
+  .rsvp-form input[type="number"],
+  .rsvp-form textarea{
+    background:var(--ink-soft);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:0.8rem 1rem;
+    color:var(--ivory);
+    font-family:'Jost', sans-serif;
+    font-size:0.95rem;
+    transition:border-color 0.3s, box-shadow 0.3s;
+  }
+  .rsvp-form input:focus,
+  .rsvp-form textarea:focus{
+    outline:none;
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(205,161,101,0.18);
+  }
+  .rsvp-form fieldset{
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:1rem 1rem 0.9rem;
+    display:flex;
+    flex-direction:column;
+    gap:0.6rem;
+  }
+  .rsvp-form legend{
+    padding:0 0.4rem;
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  .rsvp-form fieldset label{
+    flex-direction:row;
+    align-items:center;
+    gap:0.6rem;
+    font-size:0.92rem;
+    color:rgba(247,241,230,0.85);
+  }
+  .rsvp-form input[type="radio"]{ accent-color:var(--gold); width:16px; height:16px; }
+
+  .submit-btn{
+    position:relative;
+    margin-top:0.4rem;
+    padding:0.95rem 1.4rem;
+    border:1px solid var(--gold);
+    border-radius:999px;
+    color:var(--gold-light);
+    font-family:'Italiana', serif;
+    letter-spacing:0.18em;
+    font-size:0.82rem;
+    text-transform:uppercase;
+    overflow:hidden;
+    transition:color 0.4s, box-shadow 0.4s, transform 0.2s;
+  }
+  .submit-btn::before{
+    content:'';
+    position:absolute; inset:0;
+    background:var(--gold);
+    transform:translateX(-101%);
+    transition:transform 0.45s var(--ease);
+    z-index:-1;
+  }
+  .submit-btn:hover::before{ transform:translateX(0); }
+  .submit-btn:hover{ color:#1c140a; box-shadow:0 8px 24px var(--shadow-gold); }
+  .submit-btn:active{ transform:scale(0.97); }
+
+  .rsvp-success{
+    max-width:480px;
+    margin:2.6rem auto 0;
+    padding:2.2rem 1.6rem;
+    text-align:center;
+    border:1px solid var(--gold);
+    border-radius:14px;
+    background:rgba(205,161,101,0.06);
+  }
+  .rsvp-success p:first-child{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.4rem;
+    color:var(--gold-light);
+    margin-bottom:0.4rem;
+  }
+  .rsvp-success p:last-child{ font-size:0.88rem; color:rgba(247,241,230,0.65); }
+
+  /* ===================== FOOTER ===================== */
+  .footer{
+    text-align:center;
+    padding:4.5rem 1.4rem 3.5rem;
+    border-top:1px solid var(--line);
+  }
+  .monogram{
+    font-family:'Italiana', serif;
+    font-size:1.6rem;
+    letter-spacing:0.3em;
+    color:var(--gold);
+    margin-bottom:1.1rem;
+  }
+  .footer p{ font-size:0.92rem; color:rgba(247,241,230,0.65); max-width:380px; margin:0 auto; }
+  .footer-sign{
+    margin-top:1.1rem;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1.05rem;
+    color:var(--rose);
+  }
+
+  /* ===================== RESPONSIVE ===================== */
+  @media (max-width:720px){
+    .events-grid{ grid-template-columns:1fr; }
+    .moments-grid{ grid-template-columns:repeat(3, 1fr); gap:0.8rem; }
+    section{ padding:4.5rem 0; }
+  }
+  @media (max-width:480px){
+    .countdown-grid{ gap:0.5rem; }
+    .count-card{ padding:1rem 0.2rem 0.9rem; }
+  }
+
+  *:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+</style>
+</head>
+<body class="locked">
+
+  <!-- ============ ENVELOPE GATE ============ -->
+  <div class="envelope-gate" id="gate">
+    <div class="gate-grain"></div>
+    <div class="envelope" id="envelope">
+      <div class="env-back"></div>
+      <div class="env-card">
+        <p class="env-card-label">Taklifnoma</p>
+      </div>
+      <div class="env-pocket"></div>
+      <div class="env-flap" id="flap">
+        <div class="seal" id="seal"><span class="seal-mono">A&nbsp;&amp;&nbsp;M</span></div>
+      </div>
+    </div>
+    <button class="open-btn" id="openBtn"><span>Taklifnomani ochish</span></button>
+    <p class="gate-hint">Bosing va sevgi hikoyamizga qadam qo'ying</p>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <canvas class="particles-canvas" id="particles"></canvas>
+    <div class="hero-inner">
+      <p class="eyebrow" data-reveal>To'y taklifnomasi</p>
+      <h1 class="couple-names" data-reveal data-reveal-delay="1">
+        <span class="name">Aziz</span><span class="amp">&amp;</span><span class="name">Malika</span>
+      </h1>
+      <div class="flourish-divider" data-reveal data-reveal-delay="2">
+        <svg viewBox="0 0 220 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="flourish-line" d="M2 12 C 50 2, 80 22, 110 12 C 140 2, 170 22, 218 12" stroke="#cda165" stroke-width="1.2"/>
+          <circle cx="110" cy="12" r="3" fill="#cda165"/>
+        </svg>
+      </div>
+      <p class="hero-date" data-reveal data-reveal-delay="3">12 Sentyabr, 2026 &middot; Shanba</p>
+    </div>
+    <a href="#countdown" class="scroll-cue" aria-label="Pastga aylantirish"><span class="scroll-cue-line"></span></a>
+  </section>
+
+  <!-- ============ VERSE ============ -->
+  <section class="verse">
+    <div class="container narrow">
+      <svg class="verse-flourish" viewBox="0 0 60 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-reveal>
+        <path d="M2 12 Q 30 -4 58 12" stroke="#cda165" stroke-width="1" fill="none"/>
+        <circle cx="30" cy="12" r="2.4" fill="#cda165"/>
+      </svg>
+      <p class="verse-text" data-reveal data-reveal-delay="1">"Ikki qalb bitta yo'lni tanlaganda, taqdir o'z eng go'zal sahifasini ochadi. Shu sahifaning birinchi qatorida — sizning ham ismingiz bo'lishini istaymiz."</p>
+      <span class="verse-sign" data-reveal data-reveal-delay="2">Aziz &amp; Malika</span>
+    </div>
+  </section>
+
+  <!-- ============ COUNTDOWN ============ -->
+  <section class="countdown" id="countdown">
+    <p class="eyebrow" data-reveal>Sana</p>
+    <h2 class="section-title" data-reveal>To'yimizgacha qolgan vaqt</h2>
+    <div class="countdown-grid" data-reveal data-reveal-delay="1">
+      <div class="count-card"><span class="count-num" id="cd-days">00</span><span class="count-label">kun</span></div>
+      <div class="count-card"><span class="count-num" id="cd-hours">00</span><span class="count-label">soat</span></div>
+      <div class="count-card"><span class="count-num" id="cd-mins">00</span><span class="count-label">daqiqa</span></div>
+      <div class="count-card"><span class="count-num" id="cd-secs">00</span><span class="count-label">soniya</span></div>
+    </div>
+  </section>
+
+  <!-- ============ EVENTS ============ -->
+  <section class="events">
+    <p class="eyebrow" data-reveal>Marosim</p>
+    <h2 class="section-title" data-reveal>Tadbir tafsilotlari</h2>
+    <div class="events-grid">
+      <div class="event-card" data-reveal>
+        <svg class="event-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4">
+          <circle cx="17" cy="30" r="8"/><circle cx="31" cy="30" r="8"/><path d="M14 22 L24 8 L34 22" stroke-linejoin="round"/>
+        </svg>
+        <h3>Nikoh marosimi</h3>
+        <p class="event-time">16:00</p>
+        <p class="event-place">Fuqarolik holati dalolatnomalarini<br>yozish bo'limi (ZAGS)</p>
+      </div>
+      <div class="event-card" data-reveal data-reveal-delay="1">
+        <svg class="event-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4">
+          <path d="M16 6 L32 6 L29 22 C29 27 19 27 19 22 Z"/><path d="M24 27 L24 40"/><path d="M16 40 L32 40"/>
+        </svg>
+        <h3>Ziyofat</h3>
+        <p class="event-time">18:00</p>
+        <p class="event-place">"Bog'i Rayhon" to'yxonasi<br>Toshkent sh., Mirzo Ulug'bek t.,<br>Amir Temur shoh ko'chasi 45-uy</p>
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Toshkent%20Bog%27i%20Rayhon%20toyxonasi" target="_blank" rel="noopener">Xaritada ko'rish &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DRESS CODE ============ -->
+  <section class="dresscode">
+    <p class="eyebrow" data-reveal>Kiyim tarzi</p>
+    <h2 class="section-title" data-reveal>Tavsiya etilgan ranglar</h2>
+    <p class="dresscode-note" data-reveal data-reveal-delay="1">Bayramona kechamizga ohangdosh bo'lishingiz uchun quyidagi tabiy va nafis ranglardan birini tanlashingizni tavsiya qilamiz. Iltimos, oq rangli kiyimdan saqlaning — bu kun faqat kelinga tegishli.</p>
+    <div class="palette" data-reveal data-reveal-delay="2">
+      <div class="swatch-wrap"><span class="swatch" style="--c:#cda165"></span><span class="swatch-label">Shampan oltin</span></div>
+      <div class="swatch-wrap"><span class="swatch" style="--c:#cf9a93"></span><span class="swatch-label">Pudra pushti</span></div>
+      <div class="swatch-wrap"><span class="swatch" style="--c:#7a3b3f"></span><span class="swatch-label">Marvarid bordo</span></div>
+      <div class="swatch-wrap"><span class="swatch" style="--c:#3f4a3a"></span><span class="swatch-label">Zumradsimon yashil</span></div>
+      <div class="swatch-wrap"><span class="swatch" style="--c:#2b2b3a"></span><span class="swatch-label">Tungi ko'k</span></div>
+    </div>
+  </section>
+
+  <!-- ============ MOMENTS ============ -->
+  <section class="moments">
+    <p class="eyebrow" data-reveal>Xotiralar</p>
+    <h2 class="section-title" data-reveal>Bizning lahzalarimiz</h2>
+    <div class="moments-grid">
+      <div class="moment-frame" data-reveal>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="5" width="18" height="14" rx="1.5"/><circle cx="9" cy="10" r="2"/><path d="M3 17 L9 12 L13 15 L17 11 L21 15"/></svg>
+        <span>Surat qo'shiladi</span>
+      </div>
+      <div class="moment-frame" data-reveal data-reveal-delay="1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="5" width="18" height="14" rx="1.5"/><circle cx="9" cy="10" r="2"/><path d="M3 17 L9 12 L13 15 L17 11 L21 15"/></svg>
+        <span>Surat qo'shiladi</span>
+      </div>
+      <div class="moment-frame" data-reveal data-reveal-delay="2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="5" width="18" height="14" rx="1.5"/><circle cx="9" cy="10" r="2"/><path d="M3 17 L9 12 L13 15 L17 11 L21 15"/></svg>
+        <span>Surat qo'shiladi</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RSVP ============ -->
+  <section class="rsvp" id="rsvp">
+    <p class="eyebrow" data-reveal>Tasdiqlash</p>
+    <h2 class="section-title" data-reveal>Kelishingizni bildiring</h2>
+    <p class="rsvp-note" data-reveal data-reveal-delay="1">Quyidagi formani to'ldirib, bizga tashrifingiz haqida xabar bering.</p>
+
+    <form class="rsvp-form" id="rsvpForm" data-reveal data-reveal-delay="2">
+      <label>Ism familiya
+        <input type="text" name="fullname" required placeholder="Ismingizni kiriting">
+      </label>
+      <fieldset>
+        <legend>Kelasizmi?</legend>
+        <label><input type="radio" name="attend" value="yes" checked> Albatta, kelamiz</label>
+        <label><input type="radio" name="attend" value="no"> Afsuski, kelolmaymiz</label>
+      </fieldset>
+      <label>Mehmonlar soni
+        <input type="number" name="guests" min="1" value="1">
+      </label>
+      <label>Izoh (ixtiyoriy)
+        <textarea name="note" rows="2" placeholder="Istak yoki savolingiz bo'lsa..."></textarea>
+      </label>
+      <button type="submit" class="submit-btn">Yuborish</button>
+    </form>
+
+    <div class="rsvp-success" id="rsvpSuccess" hidden>
+      <p>Rahmat!</p>
+      <p>Javobingiz qabul qilindi. Sizni shu kun kutib qolamiz.</p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="monogram">A &amp; M</div>
+    <p>Sizni shu baxtli kunimizda yonimizda ko'rishni intiqlik bilan kutamiz.</p>
+    <p class="footer-sign">Sevgi va hurmat bilan,<br>Aziz &amp; Malika</p>
+  </footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Envelope open ---------- */
+  var gate = document.getElementById('gate');
+  var envelope = document.getElementById('envelope');
+  var flap = document.getElementById('flap');
+  var seal = document.getElementById('seal');
+  var openBtn = document.getElementById('openBtn');
+
+  function openInvitation(){
+    envelope.classList.add('opening');
+    seal.classList.add('break');
+    setTimeout(function(){ flap.classList.add('open'); }, reduceMotion ? 0 : 150);
+    setTimeout(function(){
+      gate.classList.add('hide');
+      document.body.classList.remove('locked');
+    }, reduceMotion ? 50 : 1300);
+  }
+  openBtn.addEventListener('click', openInvitation);
+
+  /* ---------- Scroll reveal ---------- */
+  var revealEls = document.querySelectorAll('[data-reveal]');
+  if('IntersectionObserver' in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  /* ---------- Countdown ---------- */
+  var weddingDate = new Date('2026-09-12T16:00:00');
+  var elDays = document.getElementById('cd-days');
+  var elHours = document.getElementById('cd-hours');
+  var elMins = document.getElementById('cd-mins');
+  var elSecs = document.getElementById('cd-secs');
+  var prev = { d:null, h:null, m:null, s:null };
+
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+
+  function tickAnim(el, value, prevKey){
+    var str = pad(value);
+    if(prev[prevKey] !== value){
+      el.textContent = str;
+      if(!reduceMotion){
+        el.classList.add('tick');
+        setTimeout(function(){ el.classList.remove('tick'); }, 380);
+      }
+      prev[prevKey] = value;
+    }
+  }
+
+  function updateCountdown(){
+    var now = new Date();
+    var diff = weddingDate - now;
+    if(diff < 0) diff = 0;
+    var days = Math.floor(diff / (1000*60*60*24));
+    var hours = Math.floor((diff / (1000*60*60)) % 24);
+    var mins = Math.floor((diff / (1000*60)) % 60);
+    var secs = Math.floor((diff / 1000) % 60);
+    tickAnim(elDays, days, 'd');
+    tickAnim(elHours, hours, 'h');
+    tickAnim(elMins, mins, 'm');
+    tickAnim(elSecs, secs, 's');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ---------- RSVP form ---------- */
+  var form = document.getElementById('rsvpForm');
+  var success = document.getElementById('rsvpSuccess');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    form.hidden = true;
+    success.hidden = false;
+  });
+
+  /* ---------- Ambient gold particles ---------- */
+  var canvas = document.getElementById('particles');
+  if(canvas && !reduceMotion){
+    var ctx = canvas.getContext('2d');
+    var hero = document.getElementById('hero');
+    var particles = [];
+    var W, H;
+
+    function resize(){
+      W = canvas.width = hero.offsetWidth;
+      H = canvas.height = hero.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function makeParticle(){
+      return {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: 1 + Math.random() * 2.2,
+        speed: 0.25 + Math.random() * 0.5,
+        drift: Math.random() * 1.4 - 0.7,
+        sway: Math.random() * Math.PI * 2,
+        swaySpeed: 0.005 + Math.random() * 0.01,
+        alpha: 0.25 + Math.random() * 0.45
+      };
+    }
+    var count = Math.min(46, Math.floor(W / 22));
+    for(var i=0;i<count;i++){ particles.push(makeParticle()); }
+
+    var rafId;
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      ctx.fillStyle = '#cda165';
+      particles.forEach(function(p){
+        p.sway += p.swaySpeed;
+        p.y += p.speed;
+        p.x += Math.sin(p.sway) * 0.4 + p.drift * 0.02;
+        if(p.y > H + 5){ p.y = -5; p.x = Math.random() * W; }
+        if(p.x > W + 5) p.x = -5;
+        if(p.x < -5) p.x = W + 5;
+        ctx.globalAlpha = p.alpha;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+      rafId = requestAnimationFrame(draw);
+    }
+    draw();
+
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden){ cancelAnimationFrame(rafId); }
+      else { draw(); }
+    });
+  }
+})();
+</script>
+</body>
+</html>
