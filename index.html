@@ -449,9 +449,8 @@
 
   /* ===================== EVENTS ===================== */
   .events-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:1.6rem;
+    display:flex;
+    justify-content:center;
     max-width:880px;
     margin:2.8rem auto 0;
     padding:0 1.2rem;
@@ -462,6 +461,8 @@
     border-radius:14px;
     padding:2.4rem 1.8rem;
     text-align:center;
+    max-width:420px;
+    width:100%;
     transition:transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s;
   }
   .event-card:hover{
@@ -525,32 +526,6 @@
   }
   .swatch-wrap:hover .swatch{ transform:translateY(-5px) scale(1.06); }
   .swatch-label{ font-size:0.72rem; letter-spacing:0.05em; color:rgba(247,241,230,0.6); text-align:center; }
-
-  /* ===================== MOMENTS ===================== */
-  .moments-grid{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:1.4rem;
-    max-width:880px;
-    margin:2.6rem auto 0;
-    padding:0 1.2rem;
-  }
-  .moment-frame{
-    aspect-ratio:3/4;
-    border:1px solid var(--line);
-    border-radius:10px;
-    background:linear-gradient(155deg, rgba(205,161,101,0.10), rgba(122,59,63,0.10));
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:0.6rem;
-    color:rgba(247,241,230,0.45);
-    transition:transform 0.4s var(--ease), border-color 0.4s;
-  }
-  .moment-frame:hover{ transform:translateY(-5px); border-color:var(--gold); }
-  .moment-frame svg{ width:26px; height:26px; opacity:0.7; }
-  .moment-frame span{ font-size:0.72rem; letter-spacing:0.04em; }
 
   /* ===================== RSVP ===================== */
   .rsvp-note{
@@ -737,8 +712,6 @@
 
   /* ===================== RESPONSIVE ===================== */
   @media (max-width:720px){
-    .events-grid{ grid-template-columns:1fr; }
-    .moments-grid{ grid-template-columns:repeat(3, 1fr); gap:0.8rem; }
     section{ padding:4.5rem 0; }
   }
   @media (max-width:480px){
@@ -838,20 +811,12 @@
     <div class="events-grid">
       <div class="event-card" data-reveal>
         <svg class="event-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4">
-          <circle cx="17" cy="30" r="8"/><circle cx="31" cy="30" r="8"/><path d="M14 22 L24 8 L34 22" stroke-linejoin="round"/>
-        </svg>
-        <h3>Nikoh marosimi</h3>
-        <p class="event-time">16:00</p>
-        <p class="event-place">Fuqarolik holati dalolatnomalarini<br>yozish bo'limi (ZAGS)</p>
-      </div>
-      <div class="event-card" data-reveal data-reveal-delay="1">
-        <svg class="event-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4">
           <path d="M16 6 L32 6 L29 22 C29 27 19 27 19 22 Z"/><path d="M24 27 L24 40"/><path d="M16 40 L32 40"/>
         </svg>
         <h3>Ziyofat</h3>
         <p class="event-time">18:00</p>
         <p class="event-place">"Samara" to'yxonasi<br>Toshkent sh., Yunusobod tumani,<br>Yangi Yunusobod ko'chasi, 45B-uy</p>
-        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Toshkent%20Samara%20toyxonasi%20Yunusobod" target="_blank" rel="noopener">Xaritada ko'rish &rarr;</a>
+        <a class="map-link" href="https://yandex.uz/maps/-/CTA0AG0A" target="_blank" rel="noopener">Xaritada ko'rish &rarr;</a>
       </div>
     </div>
   </section>
@@ -867,26 +832,6 @@
       <div class="swatch-wrap"><span class="swatch" style="--c:#7a3b3f"></span><span class="swatch-label">Marvarid bordo</span></div>
       <div class="swatch-wrap"><span class="swatch" style="--c:#3f4a3a"></span><span class="swatch-label">Zumradsimon yashil</span></div>
       <div class="swatch-wrap"><span class="swatch" style="--c:#2b2b3a"></span><span class="swatch-label">Tungi ko'k</span></div>
-    </div>
-  </section>
-
-  <!-- ============ MOMENTS ============ -->
-  <section class="moments">
-    <p class="eyebrow" data-reveal>Xotiralar</p>
-    <h2 class="section-title" data-reveal>Bizning lahzalarimiz</h2>
-    <div class="moments-grid">
-      <div class="moment-frame" data-reveal>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="5" width="18" height="14" rx="1.5"/><circle cx="9" cy="10" r="2"/><path d="M3 17 L9 12 L13 15 L17 11 L21 15"/></svg>
-        <span>Surat qo'shiladi</span>
-      </div>
-      <div class="moment-frame" data-reveal data-reveal-delay="1">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="5" width="18" height="14" rx="1.5"/><circle cx="9" cy="10" r="2"/><path d="M3 17 L9 12 L13 15 L17 11 L21 15"/></svg>
-        <span>Surat qo'shiladi</span>
-      </div>
-      <div class="moment-frame" data-reveal data-reveal-delay="2">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="5" width="18" height="14" rx="1.5"/><circle cx="9" cy="10" r="2"/><path d="M3 17 L9 12 L13 15 L17 11 L21 15"/></svg>
-        <span>Surat qo'shiladi</span>
-      </div>
     </div>
   </section>
 
